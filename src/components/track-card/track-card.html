@@ -1,0 +1,31 @@
+<div class="track-card" 
+     [attr.aria-label]="track.title + ' by ' + track.artist"
+     (mouseenter)="isHovered.set(true)"
+     (mouseleave)="isHovered.set(false)">
+  <div class="thumbnail-container">
+    <img 
+      [src]="track.thumbnail" 
+      [alt]="track.title + ' album cover'"
+      class="thumbnail"
+      loading="lazy">
+    @if (isHovered()) {
+      <div class="play-overlay">
+        <div class="play-button">▶</div>
+      </div>
+    }
+  </div>
+  <div class="track-info">
+    <h3 class="track-title">{{ track.title }}</h3>
+    <p class="track-artist">{{ track.artist }}</p>
+    @if (hasMetadata()) {
+      <div class="track-meta">
+        @if (track.duration) {
+          <span class="duration">{{ track.duration }}</span>
+        }
+        @if (track.plays) {
+          <span class="plays">{{ formattedPlays() }} plays</span>
+        }
+      </div>
+    }
+  </div>
+</div>

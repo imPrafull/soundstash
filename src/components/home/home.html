@@ -1,0 +1,61 @@
+<div class="home-container">
+  <header class="header">
+    <h1 class="app-title">🎵 SoundStash</h1>
+    <p class="app-subtitle">Discover your next favorite song</p>
+  </header>
+
+  @if (chartData(); as data) {
+    <main class="main-content">
+      <ss-chart-section 
+        title="🔥 Top Tracks" 
+        [loading]="loading()"
+        class="chart-section">
+        <div class="items-grid">
+          @for (track of data.topTracks; track track.id) {
+            <ss-track-card [track]="track"></ss-track-card>
+          }
+        </div>
+      </ss-chart-section>
+
+      <ss-chart-section 
+        title="⭐ Top Artists" 
+        [loading]="loading()"
+        class="chart-section">
+        <div class="items-grid">
+          @for (artist of data.topArtists; track artist.id) {
+            <ss-artist-card [artist]="artist"></ss-artist-card>
+          }
+        </div>
+      </ss-chart-section>
+
+      <ss-chart-section 
+        title="🆕 New Releases" 
+        [loading]="loading()"
+        class="chart-section">
+        <div class="items-grid">
+          @for (track of data.topNewReleases; track track.id) {
+            <ss-track-card [track]="track"></ss-track-card>
+          }
+        </div>
+      </ss-chart-section>
+
+      <ss-chart-section 
+        title="💖 Most Loved" 
+        [loading]="loading()"
+        class="chart-section">
+        <div class="items-grid">
+          @for (track of data.mostLoved; track track.id) {
+            <ss-track-card [track]="track"></ss-track-card>
+          }
+        </div>
+      </ss-chart-section>
+    </main>
+  }
+
+  @if (loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading your music...</p>
+    </div>
+  }
+</div>

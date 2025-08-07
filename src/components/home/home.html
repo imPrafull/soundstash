@@ -5,96 +5,80 @@
   </header>
 
   <main class="main-content">
-    @defer (when !topTracksLoading()) {
-      <ss-chart-section 
-        title="🔥 Top Tracks" 
-        [loading]="topTracksLoading()"
-        class="chart-section">
+    <ss-chart-section 
+      title="🔥 Top Tracks" 
+      [loading]="topTracksLoading()"
+      class="chart-section">
+      @if (topTracksLoading()) {
+        <div class="items-grid">
+          @for (i of [1,2,3,4,5]; track i) {
+            <div class="skeleton-card track-skeleton"></div>
+          }
+        </div>
+      } @else {
         <div class="items-grid">
           @for (track of topTracks(); track track.id) {
             <ss-track-card [track]="track"></ss-track-card>
           }
         </div>
-      </ss-chart-section>
-    } @loading {
-      <ss-chart-section 
-        title="🔥 Top Tracks" 
-        [loading]="true"
-        class="chart-section">
-        <div class="loading-state">
-          <div class="spinner"></div>
-          <p>Loading top tracks...</p>
-        </div>
-      </ss-chart-section>
-    }
+      }
+    </ss-chart-section>
 
-    @defer (when !topArtistsLoading()) {
-      <ss-chart-section 
-        title="⭐ Top Artists" 
-        [loading]="topArtistsLoading()"
-        class="chart-section">
+    <ss-chart-section 
+      title="⭐ Top Artists" 
+      [loading]="topArtistsLoading()"
+      class="chart-section">
+      @if (topArtistsLoading()) {
+        <div class="items-grid">
+          @for (i of [1,2,3,4,5]; track i) {
+            <div class="skeleton-card artist-skeleton"></div>
+          }
+        </div>
+      } @else {
         <div class="items-grid">
           @for (artist of topArtists(); track artist.id) {
             <ss-artist-card [artist]="artist"></ss-artist-card>
           }
         </div>
-      </ss-chart-section>
-    } @loading {
-      <ss-chart-section 
-        title="⭐ Top Artists" 
-        [loading]="true"
-        class="chart-section">
-        <div class="loading-state">
-          <div class="spinner"></div>
-          <p>Loading top artists...</p>
-        </div>
-      </ss-chart-section>
-    }
+      }
+    </ss-chart-section>
 
-    @defer (when !newReleasesLoading()) {
-      <ss-chart-section 
-        title="🆕 New Releases" 
-        [loading]="newReleasesLoading()"
-        class="chart-section">
+    <ss-chart-section 
+      title="🆕 New Releases" 
+      [loading]="newReleasesLoading()"
+      class="chart-section">
+      @if (newReleasesLoading()) {
+        <div class="items-grid">
+          @for (i of [1,2,3,4,5]; track i) {
+            <div class="skeleton-card track-skeleton"></div>
+          }
+        </div>
+      } @else {
         <div class="items-grid">
           @for (track of newReleases(); track track.id) {
             <ss-track-card [track]="track"></ss-track-card>
           }
         </div>
-      </ss-chart-section>
-    } @loading {
-      <ss-chart-section 
-        title="🆕 New Releases" 
-        [loading]="true"
-        class="chart-section">
-        <div class="loading-state">
-          <div class="spinner"></div>
-          <p>Loading new releases...</p>
-        </div>
-      </ss-chart-section>
-    }
+      }
+    </ss-chart-section>
 
-    @defer (when !mostLovedLoading()) {
-      <ss-chart-section 
-        title="💖 Most Loved" 
-        [loading]="mostLovedLoading()"
-        class="chart-section">
+    <ss-chart-section 
+      title="💖 Most Loved" 
+      [loading]="mostLovedLoading()"
+      class="chart-section">
+      @if (mostLovedLoading()) {
+        <div class="items-grid">
+          @for (i of [1,2,3,4,5]; track i) {
+            <div class="skeleton-card track-skeleton"></div>
+          }
+        </div>
+      } @else {
         <div class="items-grid">
           @for (track of mostLoved(); track track.id) {
             <ss-track-card [track]="track"></ss-track-card>
           }
         </div>
-      </ss-chart-section>
-    } @loading {
-      <ss-chart-section 
-        title="💖 Most Loved" 
-        [loading]="true"
-        class="chart-section">
-        <div class="loading-state">
-          <div class="spinner"></div>
-          <p>Loading most loved tracks...</p>
-        </div>
-      </ss-chart-section>
-    }
+      }
+    </ss-chart-section>
   </main>
 </div>

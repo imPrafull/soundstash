@@ -5,7 +5,6 @@ import { Track, Artist, ChartData } from '../../models/music.model';
 import { ChartSectionComponent } from '../chart-section/chart-section';
 import { TrackCardComponent } from '../track-card/track-card';
 import { ArtistCardComponent } from '../artist-card/artist-card';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'ss-home',
@@ -27,70 +26,77 @@ export class HomeComponent implements OnInit {
   newReleasesLoading = signal(true);
   mostLovedLoading = signal(true);
   
-  loading = signal(true);
   error = signal<string | null>(null);
 
-  // Computed signals for overall state
-  hasData = computed(() => 
-    this.topTracks().length > 0 || 
-    this.topArtists().length > 0 || 
-    this.newReleases().length > 0 || 
-    this.mostLoved().length > 0
+  // Overall loading state - true if any section is still loading
+  loading = computed(() => 
+    this.topTracksLoading() || 
+    this.topArtistsLoading() || 
+    this.newReleasesLoading() || 
+    this.mostLovedLoading()
   );
-  
-  isReady = computed(() => !this.loading() && this.hasData());
-  
-  // Combined chart data for template compatibility
-  chartData = computed(() => ({
-    topTracks: this.topTracks(),
-    topArtists: this.topArtists(),
-    topNewReleases: this.newReleases(),
-    mostLoved: this.mostLoved()
-  }));
 
   constructor(private musicService: MusicService) {}
 
   ngOnInit(): void {
-    this.loadChartData();
+    this.loadTopTracks();
+    this.loadTopArtists();
+    this.loadNewReleases();
+    this.loadMostLoved();
   }
 
-  private loadChartData(): void {
-    this.loading.set(true);
-    this.error.set(null);
-    
-    // Load all sections simultaneously but maintain display order
-    forkJoin({
-      topTracks: this.musicService.getTopTracks(),
-      topArtists: this.musicService.getTopArtists(),
-      newReleases: this.musicService.getNewReleases(),
-      mostLoved: this.musicService.getMostLoved()
-    }).subscribe({
+  private loadTopTracks(): void {
+    this.topTracksLoading.set(true);
+    this.musicService.getTopTracks().subscribe({
       next: (data) => {
-        // Set all data at once to maintain order
-        this.topTracks.set(data.topTracks);
-        this.topArtists.set(data.topArtists);
-        this.newReleases.set(data.newReleases);
-        this.mostLoved.set(data.mostLoved);
-        
-        // Update individual loading states
+        this.topTracks.set(data);
         this.topTracksLoading.set(false);
-        this.topArtistsLoading.set(false);
-        this.newReleasesLoading.set(false);
-        this.mostLovedLoading.set(false);
-        
-        this.loading.set(false);
       },
       error: (error) => {
-        console.error('Error loading chart data:', error);
-        this.error.set('Failed to load music data');
-        
-        // Set all loading states to false on error
+        console.error('Error loading top tracks:', error);
         this.topTracksLoading.set(false);
+      }
+    });
+  }
+
+  private loadTopArtists(): void {
+    this.topArtistsLoading.set(true);
+    this.musicService.getTopArtists().subscribe({
+      next: (data) => {
+        this.topArtists.set(data);
         this.topArtistsLoading.set(false);
+      },
+      error: (error) => {
+        console.error('Error loading top artists:', error);
+        this.topArtistsLoading.set(false);
+      }
+    });
+  }
+
+  private loadNewReleases(): void {
+    this.newReleasesLoading.set(true);
+    this.musicService.getNewReleases().subscribe({
+      next: (data) => {
+        this.newReleases.set(data);
         this.newReleasesLoading.set(false);
+      },
+      error: (error) => {
+        console.error('Error loading new releases:', error);
+        this.newReleasesLoading.set(false);
+      }
+    });
+  }
+
+  private loadMostLoved(): void {
+    this.mostLovedLoading.set(true);
+    this.musicService.getMostLoved().subscribe({
+      next: (data) => {
+        this.mostLoved.set(data);
         this.mostLovedLoading.set(false);
-        
-        this.loading.set(false);
+      },
+      error: (error) => {
+        console.error('Error loading most loved:', error);
+        this.mostLovedLoading.set(false);
       }
     });
   }

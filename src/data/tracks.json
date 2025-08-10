@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "title": "Blinding Lights",
+    "artist": "The Weeknd",
+    "thumbnail": "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
+    "duration": "3:20",
+    "plays": 2500000
+  },
+  {
+    "id": "2",
+    "title": "Watermelon Sugar",
+    "artist": "Harry Styles",
+    "thumbnail": "https://images.pexels.com/photos/1626481/pexels-photo-1626481.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
+    "duration": "2:54",
+    "plays": 1800000
+  },
+  {
+    "id": "3",
+    "title": "Levitating",
+    "artist": "Dua Lipa",
+    "thumbnail": "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
+    "duration": "3:23",
+    "plays": 2200000
+  },
+  {
+    "id": "4",
+    "title": "Good 4 U",
+    "artist": "Olivia Rodrigo",
+    "thumbnail": "https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
+    "duration": "2:58",
+    "plays": 1950000
+  },
+  {
+    "id": "5",
+    "title": "Stay",
+    "artist": "The Kid LAROI & Justin Bieber",
+    "thumbnail": "https://images.pexels.com/photos/1644888/pexels-photo-1644888.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
+    "duration": "2:21",
+    "plays": 2100000
+  }
+]

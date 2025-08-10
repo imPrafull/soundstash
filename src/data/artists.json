@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "name": "The Weeknd",
+    "thumbnail": "https://images.pexels.com/photos/1386604/pexels-photo-1386604.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
+    "followers": 85000000,
+    "genre": "R&B"
+  },
+  {
+    "id": "2",
+    "name": "Taylor Swift",
+    "thumbnail": "https://images.pexels.com/photos/1694000/pexels-photo-1694000.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
+    "followers": 95000000,
+    "genre": "Pop"
+  },
+  {
+    "id": "3",
+    "name": "Drake",
+    "thumbnail": "https://images.pexels.com/photos/1845208/pexels-photo-1845208.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
+    "followers": 78000000,
+    "genre": "Hip Hop"
+  },
+  {
+    "id": "4",
+    "name": "Billie Eilish",
+    "thumbnail": "https://images.pexels.com/photos/1845189/pexels-photo-1845189.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
+    "followers": 67000000,
+    "genre": "Alternative"
+  },
+  {
+    "id": "5",
+    "name": "Ed Sheeran",
+    "thumbnail": "https://images.pexels.com/photos/1845206/pexels-photo-1845206.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop",
+    "followers": 72000000,
+    "genre": "Pop"
+  }
+]

@@ -27,7 +27,11 @@
           },
           "options": {
             "assets": [
-              "src/data"
+              {
+                "glob": "**/*",
+                "input": "src/data",
+                "output": "data"
+              }
             ],
             "index": "src/index.html",
             "browser": "src/main.ts",

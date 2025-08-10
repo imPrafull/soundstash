@@ -9,7 +9,7 @@ import { Track, Artist, ChartData } from '../models/music.model';
   providedIn: 'root'
 })
 export class MusicService {
-  private readonly baseUrl = '/src/data';
+  private readonly baseUrl = '/data';
 
   constructor(private http: HttpClient) {}
 

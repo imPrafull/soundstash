@@ -17,8 +17,8 @@ export class ArtistCardComponent {
   
   // Computed signal for formatted followers
   formattedFollowers = computed(() => {
-    if (!this.artist?.followers) return '';
-    const followers = this.artist.followers;
+    if (!this.artist?.listeners) return '';
+    const followers = +this.artist.listeners;
     if (followers >= 1000000) {
       return (followers / 1000000).toFixed(1) + 'M';
     } else if (followers >= 1000) {

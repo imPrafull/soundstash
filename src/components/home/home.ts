@@ -1,7 +1,7 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MusicService } from '../../services/music.service';
-import { Track, Artist, ChartData } from '../../models/music.model';
+import { Track, Artist } from '../../models/music.model';
 import { ChartSectionComponent } from '../chart-section/chart-section';
 import { TrackCardComponent } from '../track-card/track-card';
 import { ArtistCardComponent } from '../artist-card/artist-card';
@@ -41,14 +41,15 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadTopTracks();
     this.loadTopArtists();
-    this.loadNewReleases();
-    this.loadMostLoved();
+    // this.loadNewReleases();
+    // this.loadMostLoved();
   }
 
   private loadTopTracks(): void {
     this.topTracksLoading.set(true);
     this.musicService.getTopTracks().subscribe({
       next: (data) => {
+        console.log({data})
         this.topTracks.set(data);
         this.topTracksLoading.set(false);
       },
@@ -73,31 +74,31 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  private loadNewReleases(): void {
-    this.newReleasesLoading.set(true);
-    this.musicService.getNewReleases().subscribe({
-      next: (data) => {
-        this.newReleases.set(data);
-        this.newReleasesLoading.set(false);
-      },
-      error: (error) => {
-        console.error('Error loading new releases:', error);
-        this.newReleasesLoading.set(false);
-      }
-    });
-  }
+  // private loadNewReleases(): void {
+  //   this.newReleasesLoading.set(true);
+  //   this.musicService.getNewReleases().subscribe({
+  //     next: (data) => {
+  //       this.newReleases.set(data);
+  //       this.newReleasesLoading.set(false);
+  //     },
+  //     error: (error) => {
+  //       console.error('Error loading new releases:', error);
+  //       this.newReleasesLoading.set(false);
+  //     }
+  //   });
+  // }
 
-  private loadMostLoved(): void {
-    this.mostLovedLoading.set(true);
-    this.musicService.getMostLoved().subscribe({
-      next: (data) => {
-        this.mostLoved.set(data);
-        this.mostLovedLoading.set(false);
-      },
-      error: (error) => {
-        console.error('Error loading most loved:', error);
-        this.mostLovedLoading.set(false);
-      }
-    });
-  }
+  // private loadMostLoved(): void {
+  //   this.mostLovedLoading.set(true);
+  //   this.musicService.getMostLoved().subscribe({
+  //     next: (data) => {
+  //       this.mostLoved.set(data);
+  //       this.mostLovedLoading.set(false);
+  //     },
+  //     error: (error) => {
+  //       console.error('Error loading most loved:', error);
+  //       this.mostLovedLoading.set(false);
+  //     }
+  //   });
+  // }
 }

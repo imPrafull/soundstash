@@ -17,7 +17,7 @@
         </div>
       } @else {
         <div class="items-grid">
-          @for (track of topTracks(); track track.id) {
+          @for (track of topTracks(); track track.mbid) {
             <ss-track-card [track]="track"></ss-track-card>
           }
         </div>
@@ -36,14 +36,14 @@
         </div>
       } @else {
         <div class="items-grid">
-          @for (artist of topArtists(); track artist.id) {
+          @for (artist of topArtists(); track artist.mbid) {
             <ss-artist-card [artist]="artist"></ss-artist-card>
           }
         </div>
       }
     </ss-chart-section>
 
-    <ss-chart-section 
+    <!-- <ss-chart-section 
       title="🆕 New Releases" 
       [loading]="newReleasesLoading()"
       class="chart-section">
@@ -55,7 +55,7 @@
         </div>
       } @else {
         <div class="items-grid">
-          @for (track of newReleases(); track track.id) {
+          @for (track of newReleases(); track track.mbid) {
             <ss-track-card [track]="track"></ss-track-card>
           }
         </div>
@@ -74,11 +74,11 @@
         </div>
       } @else {
         <div class="items-grid">
-          @for (track of mostLoved(); track track.id) {
+          @for (track of mostLoved(); track track.mbid) {
             <ss-track-card [track]="track"></ss-track-card>
           }
         </div>
       }
-    </ss-chart-section>
+    </ss-chart-section> -->
   </main>
 </div>

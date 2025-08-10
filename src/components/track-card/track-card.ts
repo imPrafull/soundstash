@@ -16,10 +16,10 @@ export class TrackCardComponent {
   isHovered = signal(false);
   
   // Computed signals for derived values
-  hasMetadata = computed(() => !!(this.track?.duration || this.track?.plays));
+  hasMetadata = computed(() => !!(this.track?.duration || this.track?.playcount));
   formattedPlays = computed(() => {
-    if (!this.track?.plays) return '';
-    const plays = this.track.plays;
+    if (!this.track?.playcount) return '';
+    const plays = +this.track.playcount;
     if (plays >= 1000000) {
       return (plays / 1000000).toFixed(1) + 'M';
     } else if (plays >= 1000) {

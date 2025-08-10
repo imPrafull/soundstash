@@ -1,11 +1,11 @@
 <div class="track-card" 
-     [attr.aria-label]="track.title + ' by ' + track.artist"
+     [attr.aria-label]="track.name + ' by ' + track.artist.name"
      (mouseenter)="isHovered.set(true)"
      (mouseleave)="isHovered.set(false)">
   <div class="thumbnail-container">
     <img 
-      [src]="track.thumbnail" 
-      [alt]="track.title + ' album cover'"
+      [src]="track.image[3]['#text']" 
+      [alt]="track.name + ' album cover'"
       class="thumbnail"
       loading="lazy">
     @if (isHovered()) {
@@ -15,14 +15,14 @@
     }
   </div>
   <div class="track-info">
-    <h3 class="track-title">{{ track.title }}</h3>
-    <p class="track-artist">{{ track.artist }}</p>
+    <h3 class="track-title">{{ track.name }}</h3>
+    <p class="track-artist">{{ track.artist.name }}</p>
     @if (hasMetadata()) {
       <div class="track-meta">
         @if (track.duration) {
           <span class="duration">{{ track.duration }}</span>
         }
-        @if (track.plays) {
+        @if (track.playcount) {
           <span class="plays">{{ formattedPlays() }} plays</span>
         }
       </div>

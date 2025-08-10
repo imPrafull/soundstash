@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
+
 import { HomeComponent } from './components/home/home';
 
 @Component({
@@ -12,4 +14,8 @@ import { HomeComponent } from './components/home/home';
 })
 export class App {}
 
-bootstrapApplication(App);
+bootstrapApplication(App, {
+  providers: [
+    provideHttpClient()
+  ]
+});

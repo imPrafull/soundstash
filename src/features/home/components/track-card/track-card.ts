@@ -1,6 +1,6 @@
 import { Component, Input, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Track } from '../../models/music.model';
+import { Track } from '../../../../models/music.model';
 
 @Component({
   selector: 'ss-track-card',

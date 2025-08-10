@@ -14,10 +14,3 @@ export interface Artist {
   followers?: number;
   genre?: string;
 }
-
-export interface ChartData {
-  topTracks: Track[];
-  topArtists: Artist[];
-  topNewReleases: Track[];
-  mostLoved: Track[];
-}

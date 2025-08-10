@@ -1,10 +1,10 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MusicService } from '../../services/music.service';
-import { Track, Artist, ChartData } from '../../models/music.model';
-import { ChartSectionComponent } from '../chart-section/chart-section';
-import { TrackCardComponent } from '../track-card/track-card';
-import { ArtistCardComponent } from '../artist-card/artist-card';
+import { MusicService } from './services/music.service';
+import { Track, Artist } from '../../models/music.model';
+import { ChartSectionComponent } from './components/chart-section/chart-section';
+import { TrackCardComponent } from './components/track-card/track-card';
+import { ArtistCardComponent } from './components/artist-card/artist-card';
 
 @Component({
   selector: 'ss-home',

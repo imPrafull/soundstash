@@ -29,8 +29,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/data",
-                "output": "data"
+                "input": "src/data/",
+                "output": "/data/"
               }
             ],
             "index": "src/index.html",

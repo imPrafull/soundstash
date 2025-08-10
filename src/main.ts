@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
-import { HomeComponent } from './components/home/home';
+import { HomeComponent } from './features/home/home';
 
 @Component({
   selector: 'ss-root',

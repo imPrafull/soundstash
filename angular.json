@@ -53,6 +53,26 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "src/data/",
+                "output": "/data/"
+              }
+            ],
+            "styles": [
+              "src/global_styles.css"
+            ]
+          }
         }
       },
       "prefix": "app",

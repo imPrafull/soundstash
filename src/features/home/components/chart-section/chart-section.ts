@@ -10,8 +10,4 @@ import { CommonModule } from '@angular/common';
 })
 export class ChartSectionComponent {
   @Input() title: string = '';
-  @Input() loading: boolean = false;
-  
-  // Signal for internal state management
-  isHovered = signal(false);
 }

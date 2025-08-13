@@ -7,7 +7,6 @@
   <main class="main-content">
     <ss-chart-section 
       title="🔥 Top Tracks" 
-      [loading]="topTracksLoading()"
       class="chart-section">
       @if (topTracksLoading()) {
         <div class="items-grid">
@@ -26,7 +25,6 @@
 
     <ss-chart-section 
       title="⭐ Top Artists" 
-      [loading]="topArtistsLoading()"
       class="chart-section">
       @if (topArtistsLoading()) {
         <div class="items-grid">
@@ -45,7 +43,6 @@
 
     <ss-chart-section 
       title="🆕 New Releases" 
-      [loading]="newReleasesLoading()"
       class="chart-section">
       @if (newReleasesLoading()) {
         <div class="items-grid">
@@ -64,7 +61,6 @@
 
     <ss-chart-section 
       title="💖 Most Loved" 
-      [loading]="mostLovedLoading()"
       class="chart-section">
       @if (mostLovedLoading()) {
         <div class="items-grid">

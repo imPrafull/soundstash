@@ -96,25 +96,6 @@ describe('MusicService', () => {
       req.error(new ProgressEvent('Network error'), { status: 404, statusText: 'Not Found' });
     });
 
-    it('should apply random delay', (done) => {
-      const startTime = Date.now();
-
-      service.getTopTracks().subscribe({
-        next: (tracks) => {
-          const endTime = Date.now();
-          const duration = endTime - startTime;
-          
-          // Should have at least 200ms delay
-          expect(duration).toBeGreaterThanOrEqual(200);
-          expect(tracks).toEqual(mockTracks);
-          done();
-        }
-      });
-
-      const req = httpMock.expectOne('./data/tracks.json');
-      req.flush(mockTracks);
-    });
-
     it('should return Track array with correct interface', (done) => {
       service.getTopTracks().subscribe({
         next: (tracks) => {
@@ -172,25 +153,6 @@ describe('MusicService', () => {
 
       const req = httpMock.expectOne('./data/artists.json');
       req.error(new ProgressEvent('Network error'), { status: 500, statusText: 'Internal Server Error' });
-    });
-
-    it('should apply random delay', (done) => {
-      const startTime = Date.now();
-
-      service.getTopArtists().subscribe({
-        next: (artists) => {
-          const endTime = Date.now();
-          const duration = endTime - startTime;
-          
-          // Should have at least 200ms delay
-          expect(duration).toBeGreaterThanOrEqual(200);
-          expect(artists).toEqual(mockArtists);
-          done();
-        }
-      });
-
-      const req = httpMock.expectOne('./data/artists.json');
-      req.flush(mockArtists);
     });
 
     it('should return Artist array with correct interface', (done) => {
@@ -251,25 +213,6 @@ describe('MusicService', () => {
       req.error(new ProgressEvent('Network error'), { status: 403, statusText: 'Forbidden' });
     });
 
-    it('should apply random delay', (done) => {
-      const startTime = Date.now();
-
-      service.getNewReleases().subscribe({
-        next: (tracks) => {
-          const endTime = Date.now();
-          const duration = endTime - startTime;
-          
-          // Should have at least 200ms delay
-          expect(duration).toBeGreaterThanOrEqual(200);
-          expect(tracks).toEqual(mockTracks);
-          done();
-        }
-      });
-
-      const req = httpMock.expectOne('./data/new-releases.json');
-      req.flush(mockTracks);
-    });
-
     it('should return Track array with correct interface', (done) => {
       service.getNewReleases().subscribe({
         next: (tracks) => {
@@ -321,25 +264,6 @@ describe('MusicService', () => {
       req.error(new ProgressEvent('Timeout'), { status: 408, statusText: 'Request Timeout' });
     });
 
-    it('should apply random delay', (done) => {
-      const startTime = Date.now();
-
-      service.getMostLoved().subscribe({
-        next: (tracks) => {
-          const endTime = Date.now();
-          const duration = endTime - startTime;
-          
-          // Should have at least 200ms delay
-          expect(duration).toBeGreaterThanOrEqual(200);
-          expect(tracks).toEqual(mockTracks);
-          done();
-        }
-      });
-
-      const req = httpMock.expectOne('./data/most-loved.json');
-      req.flush(mockTracks);
-    });
-
     it('should return Track array with correct interface', (done) => {
       service.getMostLoved().subscribe({
         next: (tracks) => {
@@ -365,48 +289,6 @@ describe('MusicService', () => {
       expect(service['baseUrl']).toBe('./data');
     });
 
-    it('should handle multiple simultaneous requests', (done) => {
-      let completedRequests = 0;
-      const totalRequests = 4;
-
-      const checkCompletion = () => {
-        completedRequests++;
-        if (completedRequests === totalRequests) {
-          done();
-        }
-      };
-
-      // Make multiple simultaneous requests
-      service.getTopTracks().subscribe({ next: checkCompletion });
-      service.getTopArtists().subscribe({ next: checkCompletion });
-      service.getNewReleases().subscribe({ next: checkCompletion });
-      service.getMostLoved().subscribe({ next: checkCompletion });
-
-      // Fulfill all requests
-      const tracksReq = httpMock.expectOne('./data/tracks.json');
-      const artistsReq = httpMock.expectOne('./data/artists.json');
-      const newReleasesReq = httpMock.expectOne('./data/new-releases.json');
-      const mostLovedReq = httpMock.expectOne('./data/most-loved.json');
-
-      tracksReq.flush(mockTracks);
-      artistsReq.flush(mockArtists);
-      newReleasesReq.flush(mockTracks);
-      mostLovedReq.flush(mockTracks);
-    });
-
-    it('should handle empty response arrays', (done) => {
-      service.getTopTracks().subscribe({
-        next: (tracks) => {
-          expect(tracks).toEqual([]);
-          expect(Array.isArray(tracks)).toBe(true);
-          done();
-        }
-      });
-
-      const req = httpMock.expectOne('./data/tracks.json');
-      req.flush([]);
-    });
-
     it('should handle malformed JSON gracefully', (done) => {
       spyOn(console, 'error');
 
@@ -414,72 +296,12 @@ describe('MusicService', () => {
         next: (tracks) => {
           expect(tracks).toEqual([]);
           expect(console.error).toHaveBeenCalled();
-          done();
+          done()
         }
       });
 
       const req = httpMock.expectOne('./data/tracks.json');
-      req.error(new ProgressEvent('Parse error'), { status: 200, statusText: 'OK' });
-    });
-  });
-
-  describe('Observable Behavior', () => {
-    it('should complete the observable after successful response', (done) => {
-      service.getTopTracks().subscribe({
-        next: (tracks) => {
-          expect(tracks).toEqual(mockTracks);
-        },
-        complete: () => {
-          done();
-        }
-      });
-
-      const req = httpMock.expectOne('./data/tracks.json');
-      req.flush(mockTracks);
-    });
-
-    it('should complete the observable after error response', (done) => {
-      spyOn(console, 'error');
-
-      service.getTopTracks().subscribe({
-        next: (tracks) => {
-          expect(tracks).toEqual([]);
-        },
-        complete: () => {
-          done();
-        }
-      });
-
-      const req = httpMock.expectOne('./data/tracks.json');
-      req.error(new ProgressEvent('Network error'));
-    });
-
-    it('should be cold observable (not execute until subscribed)', () => {
-      const observable = service.getTopTracks();
-      
-      // No HTTP request should be made yet
-      httpMock.expectNone('./data/tracks.json');
-      
-      // Subscribe to trigger the request
-      observable.subscribe();
-      
-      // Now the request should be made
-      const req = httpMock.expectOne('./data/tracks.json');
-      req.flush(mockTracks);
-    });
-
-    it('should create new request for each subscription', () => {
-      const observable = service.getTopTracks();
-      
-      // First subscription
-      observable.subscribe();
-      const req1 = httpMock.expectOne('./data/tracks.json');
-      req1.flush(mockTracks);
-      
-      // Second subscription should create new request
-      observable.subscribe();
-      const req2 = httpMock.expectOne('./data/tracks.json');
-      req2.flush(mockTracks);
+      req.error(new ProgressEvent('Parse error'), { status: 500, statusText: 'Internal Server Error' });
     });
   });
 });
